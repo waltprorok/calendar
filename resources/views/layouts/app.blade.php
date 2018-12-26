@@ -92,6 +92,6 @@
 </footer>
 
 <!-- Scripts -->
-{{--<script src="{{ asset('js/app.js') }}">console.log("Look at these");</script>--}}
+{{--<script src="{{ asset('js/app.js') }}"></script>--}}
 </body>
 </html>
