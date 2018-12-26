@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('events', 'EventController@index');
+Auth::routes();
+
+Route::get('/events', 'EventController@index')->name('events');
+
+Route::get('/home', 'HomeController@index')->name('home');
