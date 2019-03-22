@@ -43,8 +43,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @auth
-                        &nbsp;
+                    @auth&nbsp;
                         <li><a href="{{ route('events') }}">Calendar</a></li>
                     @endauth
                 </ul>
