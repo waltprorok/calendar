@@ -6,11 +6,11 @@
         @if (\Session::has('success'))
             <div class="alert alert-success">
                 <p>{{ \Session::get('success') }}</p>
-            </div><br/>
+            </div>
         @endif
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Laravel Full Calendar</h3>
+                <h4>Laravel Full Calendar</h4>
             </div>
             <div class="panel-body">
                 {!! $calendar->calendar() !!}
@@ -19,6 +19,5 @@
     </div>
 
     {!! $calendar->script() !!}
-
 
 @endsection

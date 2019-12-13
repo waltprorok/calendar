@@ -66,10 +66,16 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        $event= new Event();
-        $event->title=$request->get('title');
-        $event->start_date=$request->get('startdate');
-        $event->end_date=$request->get('enddate');
+        $this->validate($request, [
+            'title' => 'required|string',
+            'start_date' => 'required|string',
+            'end_date' => 'required|string',
+        ]);
+
+        $event = new Event();
+        $event->title = $request->get('title');
+        $event->start_date = $request->get('start_date');
+        $event->end_date = $request->get('end_date');
         $event->save();
         return redirect('events')->with('success', 'Event has been added');
     }
