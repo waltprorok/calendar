@@ -30,12 +30,48 @@ class EventController extends Controller
         if ($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
-                    $value->title, true, new \DateTime($value->start_date), new \DateTime($value->end_date . ' +1 day'), null,
-                    ['url' => '/home',]
+                    $value->title,
+                    true,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date.' +1 day'),
+                    null,
+                    [
+                        'color' => '#3349FF',
+//                        'url' => '/home'
+                    ]
                 );
             }
         }
-        $calendar = Calendar::addEvents($events);
-        return view('mycalendar', compact('calendar'));
+
+        $calendar = \Calendar::addEvents($events)
+            ->setOptions([
+                'firstDay' => 0,
+                'editable'    => true,
+                'selectable'  => true,
+                'defaultView' => 'month',
+                'minTime' => '05:00:00',
+                'maxTime' => '22:00:00',
+            ])
+            ->setCallbacks([
+                'eventClick' => 'function(event) { alert(event.title) }',
+            ]);
+
+        return view('calendar', compact('calendar'));
     }
+
+    public function createEvent()
+    {
+        return view('createevent');
+    }
+
+    public function store(Request $request)
+    {
+        $event= new Event();
+        $event->title=$request->get('title');
+        $event->start_date=$request->get('startdate');
+        $event->end_date=$request->get('enddate');
+        $event->save();
+        return redirect('events')->with('success', 'Event has been added');
+    }
+
 }
