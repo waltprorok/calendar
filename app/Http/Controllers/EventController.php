@@ -31,10 +31,10 @@ class EventController extends Controller
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
                     $value->title,
-                    true,
-                    new \DateTime($value->start_date),
-                    new \DateTime($value->end_date.' +1 day'),
                     null,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date),
+                    $value->id,
                     [
                         'color' => '#3349FF',
 //                        'url' => '/home'
@@ -49,8 +49,8 @@ class EventController extends Controller
                 'editable'    => true,
                 'selectable'  => true,
                 'defaultView' => 'month',
-                'minTime' => '05:00:00',
-                'maxTime' => '22:00:00',
+                'minTime' => '00:00:00',
+                'maxTime' => '24:00:00',
             ])
             ->setCallbacks([
                 'eventClick' => 'function(event) { alert(event.title) }',
